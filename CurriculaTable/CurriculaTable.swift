@@ -83,7 +83,31 @@ public class CurriculaTable: UIView {
         }
     }
     
-    public var cornerRadius = CGFloat(5) {
+    public var cornerRadius = CGFloat(0) {
+        didSet {
+            drawCurricula()
+        }
+    }
+    
+    public var textEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2) {
+        didSet {
+            drawCurricula()
+        }
+    }
+    
+    public var textFontSize = CGFloat(11) {
+        didSet {
+            drawCurricula()
+        }
+    }
+    
+    public var textAlignment = NSTextAlignment.Left {
+        didSet {
+            drawCurricula()
+        }
+    }
+    
+    public var maximumNameLength = 12 {
         didSet {
             drawCurricula()
         }
@@ -157,25 +181,26 @@ public class CurriculaTable: UIView {
             view.backgroundColor = curriculum.bgColor
             view.layer.cornerRadius = cornerRadius
             view.layer.masksToBounds = true
-            let label = UILabel(frame: CGRect(x: 2, y: 2, width: view.frame.width - 4, height: view.frame.height - 4))
-            let attrStr = NSMutableAttributedString(string: curriculum.name.truncate(12) + "\n\n" + curriculum.place, attributes: [NSFontAttributeName: UIFont.systemFontOfSize(11)])
-            attrStr.setAttributes([NSFontAttributeName: UIFont.boldSystemFontOfSize(11)], range: NSRange(0..<curriculum.name.truncate(12).characters.count))
+            
+            let label = UILabel(frame: CGRect(x: textEdgeInsets.left, y: textEdgeInsets.top, width: view.frame.width - textEdgeInsets.left - textEdgeInsets.right, height: view.frame.height - textEdgeInsets.top - textEdgeInsets.bottom))
+            let truncatedName = curriculum.name.truncate(maximumNameLength)
+            let attrStr = NSMutableAttributedString(string: truncatedName + "\n\n" + curriculum.place, attributes: [NSFontAttributeName: UIFont.systemFontOfSize(textFontSize)])
+            attrStr.setAttributes([NSFontAttributeName: UIFont.boldSystemFontOfSize(textFontSize)], range: NSRange(0..<truncatedName.characters.count))
             label.attributedText = attrStr
             label.textColor = curriculum.textColor
-            label.tag = index
+            label.textAlignment = textAlignment
             label.numberOfLines = 0
-            label.textAlignment = .Left
-            let tap = UITapGestureRecognizer(target: self, action: #selector(curriculumTapped))
-            label.addGestureRecognizer(tap)
+            label.tag = index
+            label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(curriculumTapped)))
             label.userInteractionEnabled = true
+            
             view.addSubview(label)
             addSubview(view)
         }
     }
     
     func curriculumTapped(sender: UITapGestureRecognizer) {
-        let label = sender.view as! UILabel
-        let curriculum = curricula[label.tag]
+        let curriculum = curricula[(sender.view as! UILabel).tag]
         curriculum.tapHandler(curriculum)
     }
     
