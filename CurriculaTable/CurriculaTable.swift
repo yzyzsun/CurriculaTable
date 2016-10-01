@@ -107,7 +107,7 @@ public class CurriculaTable: UIView {
         }
     }
     
-    public var maximumNameLength = 12 {
+    public var maximumNameLength = 0 {
         didSet {
             drawCurricula()
         }
@@ -183,9 +183,12 @@ public class CurriculaTable: UIView {
             view.layer.masksToBounds = true
             
             let label = UILabel(frame: CGRect(x: textEdgeInsets.left, y: textEdgeInsets.top, width: view.frame.width - textEdgeInsets.left - textEdgeInsets.right, height: view.frame.height - textEdgeInsets.top - textEdgeInsets.bottom))
-            let truncatedName = curriculum.name.truncate(maximumNameLength)
-            let attrStr = NSMutableAttributedString(string: truncatedName + "\n\n" + curriculum.place, attributes: [NSFontAttributeName: UIFont.systemFontOfSize(textFontSize)])
-            attrStr.setAttributes([NSFontAttributeName: UIFont.boldSystemFontOfSize(textFontSize)], range: NSRange(0..<truncatedName.characters.count))
+            var name = curriculum.name
+            if maximumNameLength > 0 {
+                name = name.truncate(maximumNameLength)
+            }
+            let attrStr = NSMutableAttributedString(string: name + "\n\n" + curriculum.place, attributes: [NSFontAttributeName: UIFont.systemFontOfSize(textFontSize)])
+            attrStr.setAttributes([NSFontAttributeName: UIFont.boldSystemFontOfSize(textFontSize)], range: NSRange(0..<name.characters.count))
             label.attributedText = attrStr
             label.textColor = curriculum.textColor
             label.textAlignment = textAlignment
