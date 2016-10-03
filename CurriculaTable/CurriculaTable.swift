@@ -89,7 +89,13 @@ public class CurriculaTable: UIView {
         }
     }
     
-    public var textEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2) {
+    public var rectEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) {
+        didSet {
+            drawCurricula()
+        }
+    }
+    
+    public var textEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) {
         didSet {
             drawCurricula()
         }
@@ -174,10 +180,11 @@ public class CurriculaTable: UIView {
         }
         for (index, curriculum) in curricula.enumerate() {
             let weekdayIndex = (curriculum.weekday.rawValue - firstWeekday.rawValue + 7) % 7
-            let x = widthOfPeriodSymbols + averageWidth * CGFloat(weekdayIndex)
-            let y = heightOfWeekdaySymbols + averageHeight * CGFloat(curriculum.startPeriod - 1)
-            let height = averageHeight * CGFloat(curriculum.endPeriod - curriculum.startPeriod + 1)
-            let view = UIView(frame: CGRect(x: x, y: y, width: averageWidth, height: height))
+            let x = widthOfPeriodSymbols + averageWidth * CGFloat(weekdayIndex) + rectEdgeInsets.left
+            let y = heightOfWeekdaySymbols + averageHeight * CGFloat(curriculum.startPeriod - 1) + rectEdgeInsets.top
+            let width = averageWidth - rectEdgeInsets.left - rectEdgeInsets.right
+            let height = averageHeight * CGFloat(curriculum.endPeriod - curriculum.startPeriod + 1) - rectEdgeInsets.top - rectEdgeInsets.bottom
+            let view = UIView(frame: CGRect(x: x, y: y, width: width, height: height))
             view.backgroundColor = curriculum.bgColor
             view.layer.cornerRadius = cornerRadius
             view.layer.masksToBounds = true
