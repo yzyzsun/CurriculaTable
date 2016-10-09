@@ -20,7 +20,7 @@ public struct CurriculaTableItem {
     public let identifier: String
     public let tapHandler: (CurriculaTableItem) -> Void
     
-    public init(name: String, place: String, weekday: CurriculaTableWeekday, startPeriod: Int, endPeriod: Int, textColor: UIColor, bgColor: UIColor, identifier: String, tapHandler: (CurriculaTableItem) -> Void) {
+    public init(name: String, place: String, weekday: CurriculaTableWeekday, startPeriod: Int, endPeriod: Int, textColor: UIColor, bgColor: UIColor, identifier: String, tapHandler: @escaping (CurriculaTableItem) -> Void) {
         self.name = name
         self.place = place
         self.weekday = weekday

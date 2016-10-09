@@ -10,8 +10,12 @@ import Foundation
 
 extension String {
     
-    func truncate(length: Int) -> String {
-        return substringToIndex(startIndex.advancedBy(length, limit: endIndex))
+    func truncated(_ length: Int) -> String {
+        return substring(to: index(startIndex, offsetBy: length, limitedBy: endIndex) ?? endIndex)
+    }
+    
+    mutating func truncate(_ length: Int) {
+        self = truncated(length)
     }
     
 }

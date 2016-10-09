@@ -13,13 +13,13 @@ public class CurriculaTable: UIView {
     private let controller = CurriculaTableController()
     private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     
-    public var weekdaySymbolType = CurriculaTableWeekdaySymbolType.Short {
+    public var weekdaySymbolType = CurriculaTableWeekdaySymbolType.short {
         didSet {
             collectionView.reloadData()
         }
     }
     
-    public var firstWeekday = CurriculaTableWeekday.Monday {
+    public var firstWeekday = CurriculaTableWeekday.monday {
         didSet {
             collectionView.reloadData()
             drawCurricula()
@@ -39,13 +39,13 @@ public class CurriculaTable: UIView {
         }
     }
     
-    public var bgColor = UIColor.clearColor() {
+    public var bgColor = UIColor.clear {
         didSet {
             collectionView.backgroundColor = bgColor
         }
     }
     
-    public var symbolsBgColor = UIColor.clearColor() {
+    public var symbolsBgColor = UIColor.clear {
         didSet {
             collectionView.reloadData()
         }
@@ -77,7 +77,7 @@ public class CurriculaTable: UIView {
         }
     }
     
-    public var borderColor = UIColor.clearColor() {
+    public var borderColor = UIColor.clear {
         didSet {
             collectionView.reloadData()
         }
@@ -107,7 +107,7 @@ public class CurriculaTable: UIView {
         }
     }
     
-    public var textAlignment = NSTextAlignment.Left {
+    public var textAlignment = NSTextAlignment.left {
         didSet {
             drawCurricula()
         }
@@ -122,17 +122,16 @@ public class CurriculaTable: UIView {
     var weekdaySymbols: [String] {
         var weekdaySymbols = [String]()
         
-        let calendar = NSCalendar.currentCalendar()
         switch weekdaySymbolType {
-        case .Normal:
-            weekdaySymbols = calendar.standaloneWeekdaySymbols
-        case .Short:
-            weekdaySymbols = calendar.shortStandaloneWeekdaySymbols
-        case .VeryShort:
-            weekdaySymbols = calendar.veryShortStandaloneWeekdaySymbols
+        case .normal:
+            weekdaySymbols = Calendar.current.standaloneWeekdaySymbols
+        case .short:
+            weekdaySymbols = Calendar.current.shortStandaloneWeekdaySymbols
+        case .veryShort:
+            weekdaySymbols = Calendar.current.veryShortStandaloneWeekdaySymbols
         }
         let firstWeekdayIndex = firstWeekday.rawValue - 1
-        weekdaySymbols.rotateInPlace(shiftingToStart: firstWeekdayIndex)
+        weekdaySymbols.rotate(shiftingToStart: firstWeekdayIndex)
         
         return weekdaySymbols
     }
@@ -178,7 +177,7 @@ public class CurriculaTable: UIView {
                 subview.removeFromSuperview()
             }
         }
-        for (index, curriculum) in curricula.enumerate() {
+        for (index, curriculum) in curricula.enumerated() {
             let weekdayIndex = (curriculum.weekday.rawValue - firstWeekday.rawValue + 7) % 7
             let x = widthOfPeriodSymbols + averageWidth * CGFloat(weekdayIndex) + rectEdgeInsets.left
             let y = heightOfWeekdaySymbols + averageHeight * CGFloat(curriculum.startPeriod - 1) + rectEdgeInsets.top
@@ -192,24 +191,24 @@ public class CurriculaTable: UIView {
             let label = UILabel(frame: CGRect(x: textEdgeInsets.left, y: textEdgeInsets.top, width: view.frame.width - textEdgeInsets.left - textEdgeInsets.right, height: view.frame.height - textEdgeInsets.top - textEdgeInsets.bottom))
             var name = curriculum.name
             if maximumNameLength > 0 {
-                name = name.truncate(maximumNameLength)
+                name.truncate(maximumNameLength)
             }
-            let attrStr = NSMutableAttributedString(string: name + "\n\n" + curriculum.place, attributes: [NSFontAttributeName: UIFont.systemFontOfSize(textFontSize)])
-            attrStr.setAttributes([NSFontAttributeName: UIFont.boldSystemFontOfSize(textFontSize)], range: NSRange(0..<name.characters.count))
+            let attrStr = NSMutableAttributedString(string: name + "\n\n" + curriculum.place, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: textFontSize)])
+            attrStr.setAttributes([NSFontAttributeName: UIFont.boldSystemFont(ofSize: textFontSize)], range: NSRange(0..<name.characters.count))
             label.attributedText = attrStr
             label.textColor = curriculum.textColor
             label.textAlignment = textAlignment
             label.numberOfLines = 0
             label.tag = index
             label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(curriculumTapped)))
-            label.userInteractionEnabled = true
+            label.isUserInteractionEnabled = true
             
             view.addSubview(label)
             addSubview(view)
         }
     }
     
-    func curriculumTapped(sender: UITapGestureRecognizer) {
+    func curriculumTapped(_ sender: UITapGestureRecognizer) {
         let curriculum = curricula[(sender.view as! UILabel).tag]
         curriculum.tapHandler(curriculum)
     }

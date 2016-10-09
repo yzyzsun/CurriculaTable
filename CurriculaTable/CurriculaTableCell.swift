@@ -15,7 +15,7 @@ class CurriculaTableCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        textLabel.textAlignment = .Center
+        textLabel.textAlignment = .center
         addSubview(textLabel)
     }
     

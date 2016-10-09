@@ -10,12 +10,12 @@ import Foundation
 
 extension Array {
     
-    func rotate(shiftingToStart middle: Index) -> Array {
+    func rotated(shiftingToStart middle: Index) -> Array {
         return Array(suffix(count - middle) + prefix(middle))
     }
     
-    mutating func rotateInPlace(shiftingToStart middle: Index) {
-        self = rotate(shiftingToStart: middle)
+    mutating func rotate(shiftingToStart middle: Index) {
+        self = rotated(shiftingToStart: middle)
     }
     
 }

@@ -16,7 +16,7 @@ class CurriculaTableController: UIViewController {
     
     var collectionView: UICollectionView! {
         didSet {
-            collectionView.registerClass(CurriculaTableCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+            collectionView.register(CurriculaTableCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         }
     }
     
@@ -24,16 +24,16 @@ class CurriculaTableController: UIViewController {
 
 extension CurriculaTableController: UICollectionViewDataSource {
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return (curriculaTable.numberOfPeriods + 1) * 8
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CurriculaTableCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CurriculaTableCell
         cell.backgroundColor = curriculaTable.symbolsBgColor
         cell.layer.borderWidth = curriculaTable.borderWidth
-        cell.layer.borderColor = curriculaTable.borderColor.CGColor
-        cell.textLabel.font = UIFont.systemFontOfSize(curriculaTable.symbolsFontSize)
+        cell.layer.borderColor = curriculaTable.borderColor.cgColor
+        cell.textLabel.font = UIFont.systemFont(ofSize: curriculaTable.symbolsFontSize)
         if indexPath.row == 0 {
             cell.textLabel.text = ""
         } else if indexPath.row < 8 {
@@ -42,7 +42,7 @@ extension CurriculaTableController: UICollectionViewDataSource {
             cell.textLabel.text = String(indexPath.row / 8)
         } else {
             cell.textLabel.text = ""
-            cell.backgroundColor = UIColor.clearColor()
+            cell.backgroundColor = UIColor.clear
         }
         return cell
     }
@@ -51,7 +51,7 @@ extension CurriculaTableController: UICollectionViewDataSource {
 
 extension CurriculaTableController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.row == 0 {
             return CGSize(width: curriculaTable.widthOfPeriodSymbols, height: curriculaTable.heightOfWeekdaySymbols)
         } else if indexPath.row < 8 {
@@ -63,11 +63,11 @@ extension CurriculaTableController: UICollectionViewDelegateFlowLayout {
         }
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     
