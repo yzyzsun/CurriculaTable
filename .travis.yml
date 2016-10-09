@@ -1,5 +1,4 @@
 language: objective-c
 osx_image: xcode8
-xcode_sdk: iphonesimulator10.0
-xcode_project: CurriculaTable.xcodeproj
-xcode_scheme: CurriculaTableDemo
+script:
+    set -o pipefail && xcodebuild -project CurriculaTable.xcodeproj -scheme CurriculaTableDemo -sdk iphonesimulator10.0 | xcpretty
