@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'CurriculaTable'
-  s.version          = '0.1.2'
+  s.version          = '0.2.0'
   s.summary          = 'A flexible timetable for curricula written in Swift.'
   s.homepage         = 'https://github.com/yzyzsun/CurriculaTable'
   s.screenshots      = 'https://raw.githubusercontent.com/yzyzsun/CurriculaTable/master/screenshot.png'
