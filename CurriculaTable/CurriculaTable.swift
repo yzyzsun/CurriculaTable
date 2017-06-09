@@ -141,7 +141,7 @@ public class CurriculaTable: UIView {
     }
     
     var averageWidth: CGFloat {
-        return (collectionView.frame.width - widthOfPeriodSymbols) / 7
+        return (collectionView.frame.width - widthOfPeriodSymbols) / 7 - 0.1
     }
     
     public override init(frame: CGRect) {
@@ -168,6 +168,7 @@ public class CurriculaTable: UIView {
         super.layoutSubviews()
         
         collectionView.frame = bounds
+        collectionView.reloadData()
         drawCurricula()
     }
     
