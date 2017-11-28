@@ -12,9 +12,9 @@ private let reuseIdentifier = "Cell"
 
 class CurriculaTableController: UIViewController {
     
-    var curriculaTable: CurriculaTable!
+    weak var curriculaTable: CurriculaTable!
     
-    var collectionView: UICollectionView! {
+    weak var collectionView: UICollectionView! {
         didSet {
             collectionView.register(CurriculaTableCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         }

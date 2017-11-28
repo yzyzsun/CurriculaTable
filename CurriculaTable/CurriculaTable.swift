@@ -107,7 +107,7 @@ public class CurriculaTable: UIView {
         }
     }
     
-    public var textAlignment = NSTextAlignment.left {
+    public var textAlignment = NSTextAlignment.center {
         didSet {
             drawCurricula()
         }
