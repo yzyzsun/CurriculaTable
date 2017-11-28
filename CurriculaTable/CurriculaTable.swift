@@ -194,8 +194,8 @@ public class CurriculaTable: UIView {
             if maximumNameLength > 0 {
                 name.truncate(maximumNameLength)
             }
-            let attrStr = NSMutableAttributedString(string: name + "\n\n" + curriculum.place, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: textFontSize)])
-            attrStr.setAttributes([NSFontAttributeName: UIFont.boldSystemFont(ofSize: textFontSize)], range: NSRange(0..<name.characters.count))
+            let attrStr = NSMutableAttributedString(string: name + "\n\n" + curriculum.place, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: textFontSize)])
+            attrStr.setAttributes([NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: textFontSize)], range: NSRange(0..<name.count))
             label.attributedText = attrStr
             label.textColor = curriculum.textColor
             label.textAlignment = textAlignment
@@ -209,7 +209,7 @@ public class CurriculaTable: UIView {
         }
     }
     
-    func curriculumTapped(_ sender: UITapGestureRecognizer) {
+    @objc func curriculumTapped(_ sender: UITapGestureRecognizer) {
         let curriculum = curricula[(sender.view as! UILabel).tag]
         curriculum.tapHandler(curriculum)
     }

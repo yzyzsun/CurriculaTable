@@ -11,7 +11,8 @@ import Foundation
 extension String {
     
     func truncated(_ length: Int) -> String {
-        return substring(to: index(startIndex, offsetBy: length, limitedBy: endIndex) ?? endIndex)
+        let end = index(startIndex, offsetBy: length, limitedBy: endIndex) ?? endIndex
+        return String(self[..<end])
     }
     
     mutating func truncate(_ length: Int) {
