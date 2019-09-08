@@ -194,8 +194,8 @@ public class CurriculaTable: UIView {
             if maximumNameLength > 0 {
                 name.truncate(maximumNameLength)
             }
-            let attrStr = NSMutableAttributedString(string: name + "\n\n" + curriculum.place, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: textFontSize)])
-            attrStr.setAttributes([NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: textFontSize)], range: NSRange(0..<name.count))
+            let attrStr = NSMutableAttributedString(string: name + "\n\n" + curriculum.place, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: textFontSize)])
+            attrStr.setAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: textFontSize)], range: NSRange(0..<name.count))
             label.attributedText = attrStr
             label.textColor = curriculum.textColor
             label.textAlignment = textAlignment
