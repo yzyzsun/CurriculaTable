@@ -27,5 +27,6 @@ pod "CurriculaTable"
 You can refer to `CurriculaTableDemo`. Details are to be supplemented.
 
 ## Screenshot
-
-![Screenshot](screenshot.png)
+Light/Dark Mode<br>
+<img alt="icon" src="https://user-images.githubusercontent.com/8678595/67561393-b60c8500-f757-11e9-84cc-fa217dc33828.png" width="45%">
+<img alt="icon" src="https://user-images.githubusercontent.com/8678595/67561399-b7d64880-f757-11e9-8e2b-c9f8ddb3f0d7.png" width="45%">
