@@ -160,7 +160,24 @@ public class CurriculaTable: UIView {
         
         collectionView.dataSource = controller
         collectionView.delegate = controller
-        collectionView.backgroundColor = bgColor
+        
+        //set bgcolor for darkmode
+        if #available(iOS 13.0, *) {
+            let bundle = Bundle(for: CurriculaTable.self)
+            //auto tableBackgroundColor dark
+            collectionView.backgroundColor =
+                UIColor(named: "TableBackground",
+                        in: bundle,
+                        compatibleWith: nil) ?? UIColor.clear
+            //auto tableBorderColor dark
+            borderColor =
+                UIColor(named: "TableBoarderColor",
+                        in: bundle,
+                        compatibleWith: nil) ?? UIColor.clear
+        }else{
+            collectionView.backgroundColor = bgColor
+        }
+        
         addSubview(collectionView)
     }
     

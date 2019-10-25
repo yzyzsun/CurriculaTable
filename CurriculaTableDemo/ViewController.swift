@@ -47,9 +47,12 @@ class ViewController: UIViewController {
         
         curriculaTable.curricula = [infoSecA, infoSecB, databaseA, databaseB, comOrgA, comOrgB, dataStructureA, dataStructureB, paraAlgoA, paraAlgoB, maoismA, maoismB, nihongoA, nihongoB, radio, asianEco]
         
-        curriculaTable.bgColor = UIColor(red: 0.94, green: 0.94, blue: 0.94, alpha: 1.0)
+        // if you set bgColor, bgColor
+        // you can't use auto darkmode
+        //curriculaTable.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 0.9)
+        //curriculaTable.bgColor = UIColor(red: 0.94, green: 0.94, blue: 0.94, alpha: 1.0)
+        
         curriculaTable.borderWidth = 0.5
-        curriculaTable.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 0.9)
         curriculaTable.cornerRadius = 5
         curriculaTable.textEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         curriculaTable.maximumNameLength = 12

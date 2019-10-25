@@ -33,6 +33,7 @@ extension CurriculaTableController: UICollectionViewDataSource {
         cell.backgroundColor = curriculaTable.symbolsBgColor
         cell.layer.borderWidth = curriculaTable.borderWidth
         cell.layer.borderColor = curriculaTable.borderColor.cgColor
+        
         cell.textLabel.font = UIFont.systemFont(ofSize: curriculaTable.symbolsFontSize)
         if indexPath.row == 0 {
             cell.textLabel.text = ""
